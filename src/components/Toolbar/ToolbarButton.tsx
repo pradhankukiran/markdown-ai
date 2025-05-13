@@ -18,7 +18,7 @@ const ToolbarButton: React.FC<ToolbarButtonProps> = ({
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
-    <div className="relative">
+    <div className="relative inline-flex">
       <button
         onClick={onClick}
         disabled={disabled}
@@ -35,9 +35,22 @@ const ToolbarButton: React.FC<ToolbarButtonProps> = ({
       </button>
       
       {tooltip && showTooltip && (
-        <div className="absolute left-1/2 top-full mt-2 transform -translate-x-1/2 px-2 py-1 bg-gray-800 text-white text-xs rounded whitespace-nowrap z-10 animate-fade-in">
+        <div 
+          className="absolute left-1/2 top-full mt-1 transform -translate-x-1/2 px-2 py-1 bg-gray-800 text-white text-xs rounded whitespace-nowrap z-50"
+          style={{ 
+            pointerEvents: 'none',
+            opacity: showTooltip ? 1 : 0,
+            transition: 'opacity 150ms ease-in-out'
+          }}
+        >
           {tooltip}
-          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-gray-800"></div>
+          <div 
+            className="absolute bottom-full left-1/2 transform -translate-x-1/2 border-solid"
+            style={{
+              borderWidth: '0 4px 4px 4px',
+              borderColor: 'transparent transparent #1f2937 transparent'
+            }}
+          />
         </div>
       )}
     </div>
