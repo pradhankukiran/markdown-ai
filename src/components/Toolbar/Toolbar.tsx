@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 import {
   Sun,
   Moon,
@@ -67,6 +69,15 @@ const Toolbar: React.FC<ToolbarProps> = ({
 }) => {
   const { theme, toggleTheme } = useTheme();
   const [exportDropdownOpen, setExportDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  const handleCreateNew = () => {
+    const newId = nanoid(10); // Generate a 10-character unique ID
+    navigate(`/doc/${newId}`);
+    // Clear localStorage for the new document
+    localStorage.removeItem('markdown');
+  };
 
   // Toggle export dropdown
   const toggleExportDropdown = () => {
@@ -281,7 +292,7 @@ pie title Distribution
       <div className="flex items-center space-x-2">
         {/* Create and Collab buttons */}
         <ToolbarButton 
-          onClick={() => {}}
+          onClick={handleCreateNew}
           tooltip="Create a new document"
           className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white px-4 py-2 rounded-md font-semibold"
         >

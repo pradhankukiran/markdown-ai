@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 
 // Sample Markdown to show when the editor first loads
 const DEFAULT_MARKDOWN = `# Welcome to the Markdown Editor
@@ -92,8 +93,11 @@ interface UseMarkdownStateReturn {
 
 const useMarkdownState = (): UseMarkdownStateReturn => {
   // Initialize with saved content or default
+  const { id } = useParams();
+  const storageKey = useRef(`markdown-${id || 'default'}`);
+
   const [markdown, setMarkdownInternal] = useState<string>(() => {
-    const saved = localStorage.getItem('markdown');
+    const saved = localStorage.getItem(storageKey.current);
     return saved || DEFAULT_MARKDOWN;
   });
 
@@ -189,8 +193,8 @@ const useMarkdownState = (): UseMarkdownStateReturn => {
 
   // Save to localStorage
   const saveToLocalStorage = useCallback(() => {
-    localStorage.setItem('markdown', markdown);
-  }, [markdown]);
+    localStorage.setItem(storageKey.current, markdown);
+  }, [markdown, storageKey]);
 
   // Auto-save on changes
   useEffect(() => {
