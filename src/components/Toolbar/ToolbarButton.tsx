@@ -4,6 +4,7 @@ interface ToolbarButtonProps {
   onClick: () => void;
   disabled?: boolean;
   tooltip?: string;
+  className?: string;
   children: React.ReactNode;
 }
 
@@ -11,6 +12,7 @@ const ToolbarButton: React.FC<ToolbarButtonProps> = ({
   onClick, 
   disabled = false, 
   tooltip,
+  className = '',
   children 
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -22,11 +24,11 @@ const ToolbarButton: React.FC<ToolbarButtonProps> = ({
         disabled={disabled}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
-        className={`p-2 rounded-md transition-colors ${
+        className={`flex items-center transition-colors ${className || `p-2 rounded-md ${
           disabled 
             ? 'text-gray-400 dark:text-gray-600 cursor-not-allowed' 
             : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600'
-        }`}
+        }`}`}
         aria-label={tooltip}
       >
         {children}
