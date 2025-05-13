@@ -74,9 +74,8 @@ const Toolbar: React.FC<ToolbarProps> = ({
 
   const handleCreateNew = () => {
     const newId = nanoid(10); // Generate a 10-character unique ID
-    navigate(`/doc/${newId}`);
-    // Clear localStorage for the new document
-    localStorage.removeItem('markdown');
+    const newDocUrl = `${window.location.origin}/doc/${newId}`;
+    window.open(newDocUrl, '_blank');
   };
 
   // Toggle export dropdown

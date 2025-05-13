@@ -96,7 +96,13 @@ const useMarkdownState = (): UseMarkdownStateReturn => {
   const { id } = useParams();
   const storageKey = useRef(`markdown-${id || 'default'}`);
 
+  // Initialize with empty content for new documents, default content for home page
   const [markdown, setMarkdownInternal] = useState<string>(() => {
+    if (id) {
+      // For new documents, start empty
+      return '';
+    }
+    // For home page, use saved content or default
     const saved = localStorage.getItem(storageKey.current);
     return saved || DEFAULT_MARKDOWN;
   });
