@@ -285,7 +285,7 @@ pie title Distribution
           tooltip="Create a new document"
           className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white px-4 py-2 rounded-md font-semibold"
         >
-          <FilePlus size={20} className="mr-1" />
+          <FilePlus size={18} className="mr-1" />
           <span>Create</span>
         </ToolbarButton>
         <ToolbarButton 
@@ -293,7 +293,7 @@ pie title Distribution
           tooltip="Collab with another user's document"
           className="bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white px-4 py-2 rounded-md font-semibold"
         >
-          <Users size={20} className="mr-1" />
+          <Users size={18} className="mr-1" />
           <span>Collab</span>
         </ToolbarButton>
 
